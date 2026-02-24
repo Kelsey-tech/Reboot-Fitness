@@ -1,0 +1,245 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workouts</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #111;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            background-image: url(images/P_background.jpg);
+            background-repeat: no-repeat;
+          background-size: cover;
+            
+        }
+        .carousel {
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+            scroll-behavior: smooth;
+            width: 80%;
+            height: 40%;
+        }
+        .workout-card {
+            width: 250px;
+            /* background: #333; */
+            background-color: rgba(39, 39, 39, 0.72);
+ 
+  border: solid 2px #ef6125;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            text-align: center;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+            color:  #ef6125;
+        }
+        .workout-card img {
+            width: 100%;
+            border-radius: 10px;
+        }
+        .workout-card .heart {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            cursor: pointer;
+            color: grey;
+        }
+        .workout-card .heart.fav {
+            color:  #ef6125;
+        }
+        .reminder-btn {
+          color: white;
+    border: solid #ef6125 2px;
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0,0.5);
+    width: 100px;
+    height: 50px;
+
+        }
+        .reminder-btn:hover {
+            background: #FF8C00;
+  
+        }
+        
+        
+.sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #333;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+  }
+  
+  .sidebar a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+  }
+  
+  .sidebar a:hover {
+    color: #f1f1f1;
+  }
+  
+  .sidebar .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+  
+  .openbtn {
+    font-size: 20px;
+    cursor: pointer;
+    background-color: #333;
+    color: #FFA500;
+    padding: 10px 15px;
+    border: none;
+  }
+  
+  .openbtn:hover {
+    background-color: #444;
+  }
+  
+  #main {
+    transition: margin-left .5s;
+    padding: 16px;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+  
+  @media screen and (max-height: 450px) {
+    .sidebar {padding-top: 15px;}
+    .sidebar a {font-size: 18px;}
+  }
+
+
+    </style>
+</head>
+<body>
+  <h1 style="color: #ef6125;"> Favourite workout</h1>
+    <div class="carousel">
+        <div class="workout-card" data-tip="Push-ups build upper body strength!">
+            <span class="heart">&#10084;</span>
+            <img src="images/pushups.jpeg" alt="Push-ups">
+            <br>
+            <br>
+            <br>
+            <br>
+            <h3>Push-ups</h3>
+            <p>A great exercise for chest, shoulders, and triceps.</p>
+            <button class="reminder-btn">Workout Tip</button>
+        </div>
+        <div class="workout-card" data-tip="Squats improve leg strength and stability!">
+            <span class="heart">&#10084;</span>
+            <img src="images/squats.jpeg" alt="Squats">
+            <br>
+            <br>
+            <br>
+            <br>
+            <h3>Squats</h3>
+            <p>Strengthens legs and core muscles.</p>
+            <button class="reminder-btn">Workout Tip</button>
+        </div>
+        <div class="workout-card" data-tip="Lunges enhance balance and coordination!">
+            <span class="heart">&#10084;</span>
+            <img src="images/lunges.jpeg" alt="Lunges">
+            <br>
+            
+            <h3>Lunges</h3>
+            <p>Great for leg strength and stability.</p>
+            <button class="reminder-btn">Workout Tip</button>
+        </div>
+        <div class="workout-card" data-tip="Plank builds core strength and stability!">
+            <span class="heart">&#10084;</span>
+            <img src="images/plank.jpeg" alt="Plank">
+            <br>
+            <br>
+            <br>
+           
+            <h3>Plank</h3>
+            <p>Strengthens your core and improves posture.</p>
+            <button class="reminder-btn">Workout Tip</button>
+        </div>
+        <div class="workout-card" data-tip="Burpees are a full-body workout!">
+            <span class="heart">&#10084;</span>
+            <img src="images/burpees.jpeg" alt="Burpees">
+            <br>
+            <br>
+            <br>
+            <br>
+         
+            
+            <h3>Burpees</h3>
+            <p>A great exercise for cardio and strength.</p>
+            <button class="reminder-btn">Workout Tip</button>
+        </div>
+    </div>
+
+
+    <div id="mySidebar" class="sidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a href="homepage.html">Home</a>
+        <a href="workout.html">Workout Login</a>
+        <a href="stats.html">Workout Statistics</a>
+        <a href="goal.html">Goals</a>
+        <a href="index.html">Rewards</a>
+        <a href="timeKeeper.html">Countdown</a>
+        <a href="print.html">Print Summary</a>
+    
+  
+      </div>
+      
+      <div id="main">
+        <button class="openbtn" onclick="openNav()">☰</button>  
+      </div>
+    <script>
+        document.querySelectorAll('.heart').forEach(heart => {
+            heart.addEventListener('click', function() {
+                this.classList.toggle('fav');
+                let card = this.parentElement;
+                if (this.classList.contains('fav')) {
+                    document.querySelector('.carousel').prepend(card);
+                }
+            });
+        });
+
+
+        document.querySelectorAll('.reminder-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                alert(this.parentElement.getAttribute('data-tip'));
+            });
+        });
+
+
+        
+function openNav() {
+    document.getElementById("mySidebar").style.width = "250px";
+  }
+  
+  function closeNav() {
+    document.getElementById("mySidebar").style.width = "0";
+  }
+    </script>
+</body>
+</html>

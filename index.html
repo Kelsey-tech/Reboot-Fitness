@@ -1,0 +1,165 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fitness Rewards</title>
+  <style>
+    .sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background: #333;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+  }
+  
+  .sidebar a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+  }
+  
+  .sidebar a:hover {
+    color: #f1f1f1;
+  }
+  
+  .sidebar .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+  
+  .openbtn {
+    font-size: 20px;
+    cursor: pointer;
+    
+    color: white;
+    padding: 10px 15px;
+    border: none;
+  }
+  
+  .openbtn:hover {
+    background-color: #444;
+  }
+  
+  #main {
+    transition: margin-left .5s;
+    padding: 16px;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+  
+  /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+  @media screen and (max-height: 450px) {
+    .sidebar {padding-top: 15px;}
+    .sidebar a {font-size: 18px;}
+  }
+    body { 
+      font-family: Arial, sans-serif;
+      background-image: url(images/P_background.jpg);
+   background-size: cover;
+   background-repeat: no-repeat;
+      color: #ef6125;
+      text-align: center;
+      overflow: hidden;
+    }
+    .reward-container {
+      margin-top: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .reward {
+      background: #333;
+      border: 2px solid #ef6125;
+      padding: 20px;
+      margin: 10px;
+      border-radius: 10px;
+      width: 200px;
+      font-size: 18px;
+      animation: glow 1.5s infinite alternate;
+    }
+    @keyframes glow {
+      from { box-shadow: 0 0 5px #ef6125; }
+      to { box-shadow: 0 0 20px #ef6125; }
+    }
+  </style>
+</head>
+<body>
+    <div id="mySidebar" class="sidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a href="homepage.html">Home</a>
+        <a href="workout.html">Workout Login</a>
+        <a href="stats.html">Workout Statistics</a>
+        <a href="goal.html">Goals</a>
+        <a href="index.html">Rewards</a>
+        <a href="Fav.html">Favourites</a>
+        <a href="timeKeeper.html">Countdown</a>
+        <a href="print.html">Print Summary</a>
+        
+      </div>
+      
+      <div id="main">
+        <button class="openbtn" onclick="openNav()">☰</button>  
+      </div>
+  <h1>🏆 Your Fitness Rewards 🏆</h1>
+  <div class="reward-container" id="rewardContainer"></div>
+  
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const rewardContainer = document.getElementById("rewardContainer");
+      const workouts = JSON.parse(localStorage.getItem("workouts")) || [];
+      
+      let totalCalories = 0;
+      let totalMinutes = 0;
+      let workoutCount = workouts.length;
+
+      workouts.forEach(workout => {
+        totalCalories += parseInt(workout.calories);
+        totalMinutes += parseInt(workout.duration);
+      });
+      
+      function addReward(text) {
+        const reward = document.createElement("div");
+        reward.classList.add("reward");
+        reward.textContent = text;
+        rewardContainer.appendChild(reward);
+      }
+      
+      if (workoutCount >= 10) addReward("🎖 Logged 10 workouts!");
+      if (workoutCount >= 20) addReward("🏅 Logged 20 workouts!");
+      if (workoutCount >= 30) addReward("🥇 Logged 30 workouts!");
+      if (totalCalories >= 100) addReward("🔥 Burned 100 Calories!");
+      if (totalCalories >= 500) addReward("💪 Burned 500 Calories!");
+      if (totalCalories >= 1000) addReward("🏆 Burned 1000 Calories!");
+      if (totalMinutes >= 60) addReward("⏳ Worked out for 1 hour!");
+      if (totalMinutes >= 120) addReward("⏱ Worked out for 2 hours!");
+      if (totalMinutes >= 180) addReward("⌛ Worked out for 3 hours!");
+    });
+
+    function openNav() {
+  document.getElementById("mySidebar").style.width = "250px";
+  // document.getElementById("main").style.marginLeft = "250px";
+}
+
+function closeNav() {
+  document.getElementById("mySidebar").style.width = "0";
+  // document.getElementById("main").style.marginLeft= "0";
+}
+  </script>
+</body>
+</html> 
+
+

@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness Goal Tracker</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    background: #333; /* Dark Grey */
+    color: #fff; /* White text for contrast */
+    margin: 0;
+    padding: 20px;
+    background-image: url(images/P_background.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+    
+
+}
+
+h1 {
+    text-align: center;
+    color:  #ef6125; /* Dark Orange */
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    border: 2px solid #ef6125;
+    background-color: rgba(0, 0, 0,0.5);
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+    color: #f8a300; /* Dark Orange */
+}
+
+input[type="text"], input[type="number"], input[type="date"], select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 2px solid #ef6125;
+    background-color: rgba(0, 0, 0,0.5);
+    color: #fff; /* White text */
+}
+
+button {
+    color: white;
+    border: solid #ef6125 2px;
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0,0.5);
+    width: 100px;
+    height: 50px;
+}
+
+button:hover {
+    background:  #ef6125; /* Slightly darker orange on hover */
+}
+
+table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+    border: 2px solid #ef6125;
+    background-color: rgba(0, 0, 0,0.5);
+    color: #ef6125;
+}
+
+th, td {
+    border: 1px solid #555; /* Dark grey border */
+    padding: 10px;
+    text-align: center;
+    color: #fff;
+}
+
+th {
+    background:  #ef6125; /* Dark Orange */
+}
+
+.progress {
+    width: 100%;
+    background-color: #444; /* Dark Grey */
+    border-radius: 5px;
+}
+
+.progress-bar {
+    height: 20px;
+    background-color: #ef6125; /* Dark Orange progress bar */
+    width: 0;
+    border-radius: 5px;
+}
+
+.completed {
+    background: #4d4d4d; /* Darker grey */
+    border-color: #666;
+    color:  #ef6125; /* Dark Orange text */
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+.balloons {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    background: url('https://media.giphy.com/media/3o7buirYc8a8j4w1hO/giphy.gif') no-repeat center center fixed;
+    background-size: cover;
+    display: none;
+}
+
+/* nav bar  */
+.sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111; /* Black Sidebar */
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.sidebar a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181; /* Grey text */
+    display: block;
+    transition: 0.3s;
+}
+
+.sidebar a:hover {
+    color:  #ef6125; 
+}
+
+.sidebar .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+.openbtn {
+    font-size: 20px;
+    cursor: pointer;
+    background-color: #111; /* Black */
+    color: white;
+    padding: 10px 15px;
+    border: none;
+}
+
+.openbtn:hover {
+    background-color: #444; /* Darker grey hover */
+}
+
+#main {
+    transition: margin-left .5s;
+    padding: 16px;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+    .sidebar {padding-top: 15px;}
+    .sidebar a {font-size: 18px;}
+}
+
+    </style>
+</head>
+<body>
+    
+    <div class="balloons" id="balloons"></div>
+    <div class="container">
+        <h1>Fitness Goal Tracker</h1>
+        <label for="goal-type" style="color: #ef6125;">Select Goal:</label>
+        <select id="goal-type">
+            <option value="Run">Run (km)</option>
+            <option value="Jog">Jog (km)</option>
+            <option value="Cycle">Cycle (km)</option>
+            <option value="Burn Calories">Burn Calories (cal)</option>
+            <option value="Lift Weight">Lift Weight (kg)</option>
+        </select>
+
+        <label for="goal-amount" style="color:  #ef6125;">Amount:</label>
+        <input type="number" id="goal-amount" required>
+
+        <label for="deadline" style="color:  #ef6125;">Deadline:</label>
+        <input type="date" id="deadline" required>
+
+        <button id="add-goal">Add Goal</button>
+
+        <h2>Your Goals</h2>
+        <table id="goal-table">
+            <thead>
+                <tr>
+                    <th>Goal</th>
+                    <th>Amount</th>
+                    <th>Deadline</th>
+                    <th>Progress</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Goals will be added here dynamically -->
+            </tbody>
+        </table>
+
+        <h2>Achieved Goals</h2>
+        <table id="achieved-goal-table">
+            <thead>
+                <tr>
+                    <th>Goal</th>
+                    <th>Amount</th>
+                    <th>Deadline</th>
+                    <th>Progress</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Achieved goals will be added here dynamically -->
+            </tbody>
+        </table>
+    </div>
+    <div id="mySidebar" class="sidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a href="homepage.html">Home</a>
+        <a href="workout.html">Workout Login</a>
+        <a href="stats.html">Workout Statistics</a>
+        <a href="goal.html">Goals</a>
+        <a href="Fav.html">Favourites</a>
+        <a href="index.html">Rewards</a>
+        <a href="timeKeeper.html">Countdown</a>
+        <a href="print.html">Print Summary</a>
+
+      </div>
+      
+      <div id="main">
+        <button class="openbtn" onclick="openNav()">☰</button>  
+      </div>
+    <script>
+        // Load goals from local storage
+        document.addEventListener('DOMContentLoaded', loadGoals);
+
+        document.getElementById('add-goal').addEventListener('click', function() {
+            const goalType = document.getElementById('goal-type').value;
+            const goalAmount = document.getElementById('goal-amount').value;
+            const deadline = document.getElementById('deadline').value;
+
+            if (goalAmount && deadline) {
+                const goal = { type: goalType, amount: goalAmount, deadline: deadline, progress: 0, completed: false };
+                saveGoal(goal);
+                addGoalToTable(goal);
+                clearInputs();
+            } else {
+                alert("Please fill in all fields.");
+            }
+        });
+
+        function saveGoal(goal) {
+            const goals = JSON.parse(localStorage.getItem('fitnessGoals')) || [];
+            goals.push(goal);
+            localStorage.setItem('fitnessGoals', JSON.stringify(goals));
+        }
+
+        function loadGoals() {
+            const goals = JSON.parse(localStorage.getItem('fitnessGoals')) || [];
+            goals.forEach(goal => addGoalToTable(goal));
+        }
+
+        function addGoalToTable(goal) {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${goal.type}</td>
+                <td>${goal.amount} ${getUnit(goal.type)}</td>
+                <td>${goal.deadline}</td>
+                <td>
+                    <div class="progress">
+                        <div class="progress-bar" style="width: ${goal.progress / goal.amount * 100 || 0}%;"></div>
+                    </div>
+                </td>
+                <td>
+                    <button class="progress-btn" data-type="${goal.type}" data-amount="${goal.amount}">Log Progress</button>
+                    <button class="delete-btn">Delete</button>
+                </td>
+            `;
+            document.querySelector('#goal-table tbody').appendChild(row);
+
+            row.querySelector('.progress-btn').addEventListener('click', function() {
+                logProgress(goal);
+            });
+
+            row.querySelector('.delete-btn').addEventListener('click', function() {
+                deleteGoal(goal);
+                row.remove();
+            });
+        }
+
+        function getUnit(goalType) {
+            switch (goalType) {
+                case 'Run':
+                case 'Jog':
+                case 'Cycle':
+                    return 'km';
+                case 'Burn Calories':
+                    return 'cal';
+                case 'Lift Weight':
+                    return 'kg';
+                default:
+                    return '';
+            }
+        }
+
+        function logProgress(goal) {
+            let progressAmount;
+            if (goal.type === 'Run' || goal.type === 'Jog' || goal.type === 'Cycle') {
+                progressAmount = prompt(`How many ${getUnit(goal.type)} can you run today?`);
+            } else if (goal.type === 'Lift Weight') {
+                progressAmount = prompt(`How much weight did you lift today (in ${getUnit(goal.type)})?`);
+            } else if (goal.type === 'Burn Calories') {
+                progressAmount = prompt(`How many calories have you burned today?`);
+            }
+
+            if (progressAmount) {
+                goal.progress += Number(progressAmount);
+                if (goal.progress >= goal.amount) {
+                    goal.completed = true;
+                    alert(`Congratulations! You have completed your goal of ${goal.type}!`);
+                    moveToAchievedGoals(goal);
+                } else {
+                    alert(provideMotivationalMessage(goal));
+                }
+                updateGoalInStorage(goal);
+                updateGoalTable();
+            }
+        }
+
+        function provideMotivationalMessage(goal) {
+            const percentage = (goal.progress / goal.amount) * 100;
+            if (percentage >= 75) {
+                return "You're almost there! Keep pushing!";
+            } else if (percentage >= 50) {
+                return "Great job! You're halfway to your goal!";
+            } else {
+                return "Every step counts! Keep going!";
+            }
+        }
+
+        function deleteGoal(goal) {
+            const goals = JSON.parse(localStorage.getItem('fitnessGoals')) || [];
+            const updatedGoals = goals.filter(g => g.type !== goal.type || g.amount !== goal.amount);
+            localStorage.setItem('fitnessGoals', JSON.stringify(updatedGoals));
+        }
+
+        function moveToAchievedGoals(goal) {
+            const achievedGoals = JSON.parse(localStorage.getItem('achievedGoals')) || [];
+            achievedGoals.push(goal);
+            localStorage.setItem('achievedGoals', JSON.stringify(achievedGoals));
+            addAchievedGoalToTable(goal);
+        }
+
+        function updateGoalInStorage(updatedGoal) {
+            const goals = JSON.parse(localStorage.getItem('fitnessGoals')) || [];
+            const updatedGoals = goals.map(goal => goal.type === updatedGoal.type && goal.amount === updatedGoal.amount ? updatedGoal : goal);
+            localStorage.setItem('fitnessGoals', JSON.stringify(updatedGoals));
+        }
+
+        function updateGoalTable() {
+            const tbody = document.querySelector('#goal-table tbody');
+            tbody.innerHTML = '';
+            loadGoals();
+        }
+
+        function addAchievedGoalToTable(goal) {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${goal.type}</td>
+                <td>${goal.amount} ${getUnit(goal.type)}</td>
+                <td>${goal.deadline}</td>
+                <td>${goal.progress} ${getUnit(goal.type)}</td>
+            `;
+            document.querySelector('#achieved-goal-table tbody').appendChild(row);
+        }
+
+        function clearInputs() {
+            document.getElementById('goal-amount').value = '';
+            document.getElementById('deadline').value = '';
+        }
+
+        
+function openNav() {
+    document.getElementById("mySidebar").style.width = "250px";
+    // document.getElementById("main").style.marginLeft = "250px";
+  }
+  
+  function closeNav() {
+    document.getElementById("mySidebar").style.width = "0";
+    // document.getElementById("main").style.marginLeft= "0";
+  }
+    </script>
+</body>
+</html>

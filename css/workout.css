@@ -1,0 +1,358 @@
+:root{
+    --light-blue :#161616;
+    --turquoise :#161616;
+    --purple :#161616;
+    --blue-green : #0c0c0c;
+    --white : #090909;
+    --light-grey : #101010;
+}
+
+body{
+    margin : 0;
+    padding: 0;
+    box-sizing: 0;
+    font-family:Arial, Helvetica, sans-serif;
+    background-image: url(images/P_background.jpg);
+}
+
+@keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+#header{
+    opacity: 2;
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1.rem 10%;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    align-items: center;
+    z-index: 100;
+    border-bottom: 7px solid #ef6125;
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+  }
+  
+  #header::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  
+    background-image: url('images/P_background.jpg');
+    z-index: -1;
+  }
+
+  .navtab a{
+    font-size: 1.15rem;
+    color: #ef6125;
+    text-decoration: none;
+    font-weight: 500;
+    margin-left: 2.5rem;
+    display: inline-block;
+  }
+
+  #navbarCollapse a:hover{
+    color:#ef6125;
+  }
+  
+  .icons{
+    width: 3rem;
+
+  }
+  .Name{
+    text-transform: uppercase;
+    font-size: 6vh;
+  }
+  
+  #check{
+    display: none;
+  }
+
+  *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "poppins", sans-serif;
+  }
+
+#User {
+    height: 6vh;
+    width: 6vh;
+    display: inline;
+}
+
+/* Hero Section */
+
+@media (min-width: 1300px) {
+  .workout-container{
+      background-image: linear-gradient(125deg ,var(--turquoise), var(--blue-green), var(--light-blue));
+      height: 85vh;
+      margin-top: 30px;
+      margin-left: 30px;
+      margin-right: 30px;
+      border-radius: 20px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+     
+  }
+
+  .log-workout{
+    background-color: #ef6125;
+    
+    background-position: bottom center;
+    background-repeat: no-repeat;
+    background-size: 30%;
+    border: 5px solid #ef6125;
+    margin: 50px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content:flex-start;
+    align-items: center;
+    box-shadow: #ef6125;
+    animation: fadeIn 0.6s ease-in-out;
+}
+}
+
+@media (max-width: 1299px) {
+  .workout-container{
+    background-image: linear-gradient(125deg ,var(--turquoise), var(--blue-green), var(--light-blue));
+    height: auto;
+    padding-bottom: 0px;
+    padding-top: 20px;
+    margin-top: 30px;
+    margin-left: 30px;
+    margin-right: 30px;
+    border-radius: 0px;
+}
+
+  .log-workout{
+    /* background-color: #2a2b38; */
+    background-image: url('images/P_background.jpg');
+    background-position: bottom center;
+    background-repeat: no-repeat;
+    border: 2px solid #ef6125;
+    background-size: 100%;
+    margin: 50px;
+    border-radius: 5%;
+    display: flex;
+    flex-direction: column;
+    justify-content:flex-start;
+    align-items: center;
+    box-shadow: #9c6b56;
+    animation: fadeIn 0.6s ease-in-out;
+    padding-bottom: 30px;
+  }
+}
+
+
+#title{
+    margin: 50px 0px 20px 0px;
+    font-weight: 700;
+    color:#ef6125;
+}
+
+h2 {
+    text-align: center;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color:#ef6125;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 2px;
+    margin-top: 20px;
+    font-weight: 400;
+    color: #ffffff;
+}
+
+#workout-type, #duration, #calories, #date {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ef6125;
+    background-color: #3d3e4d;
+    color: #f7f3f1;
+    border-radius: 4px;
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+
+#submit-button {
+    margin-top: 25px;
+    width: 100%;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.12);
+    color: white;
+    border: solid #ef6125 2px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.5s;
+}
+
+#submit-button:hover {
+    /* background-color: #128d64; */
+    opacity: 0.8;
+    transform: translateY(-0.5em);
+    box-shadow: 5px 5px 5px -0.5px #ef6125 ;
+}
+
+#submit-button:active {
+    background-color: #f17c29;
+}
+
+.workout-logger{
+    /* background-color: #2a2b38; */
+    background-image: url('images/P_background.jpg');
+    margin: 50px;
+    border-radius: 20px;
+    border: 2px solid #ef6125;
+    box-shadow: #ef6125;
+    display: flex;
+    flex-direction: column;
+    justify-content:flex-start;
+    align-items: center;
+    overflow: hidden;
+    animation: fadeIn 0.6s ease-in-out;
+}
+
+#title-logger{
+    margin: 50px 0px 20px 0px;
+    font-weight: 700;
+    color: #f98335;
+}
+
+.audit-log{
+    border: 1px solid  #ef6125;
+    height: 55vh;
+    width: 120vh;
+    border-radius: 20px;
+    color: #ffffff;
+    overflow: scroll;
+    overflow-x: hidden;
+    scrollbar-color: #ef6125;
+    scrollbar-width: thin;
+}
+
+.audit-log ul li{
+    list-style: none;
+
+}
+
+#workoutList{
+    padding: 20px 0px 0px 0px;
+    color: white;
+}
+
+#workoutLog{
+    margin: 0;
+    padding: 0;
+    
+}
+
+.audit-log-header ul{
+    display: flex;
+
+}
+
+.audit-log-header ul li{
+    margin-left: 30px;
+ 
+}
+
+.workout-entry {
+    margin-top: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+    width: 98%;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border: 1px solid #ef6125;
+    border-radius: 10px;
+    background-color: #ef6125;
+}
+
+.workout-entry:hover{
+  .delete-button{
+    visibility: visible;
+  }
+}
+
+#clear-button {
+  margin-top: 25px;
+  width: 100%;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.12);
+  color: white;
+  border: solid 2px #ef6125;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.5s;
+}
+
+#clear-button:hover {
+  /* background-color: #972b2b; */
+  opacity: 0.8;
+  transform: translateY(-0.5em);
+  box-shadow: 5px 5px 5px -0.5px #ef6125 ;
+}
+
+#clear-button:active {
+  background-color: #0f0e0e;
+}
+
+.delete-button {
+    visibility: hidden;
+}
+
+.delete-button{
+  background-color: #ef6125;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 2px 10px;
+}
+
+.delete-button:active {
+    background-color: #ef6125;
+}
+
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th, td {
+  border: 1px solid #444;
+  padding: 10px;
+  text-align: center;
+}
+
+th {
+  background-color: #ff5722; /* Dark Orange */
+}
+
+.like{
+  background-color: orange;
+}

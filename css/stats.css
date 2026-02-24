@@ -1,0 +1,57 @@
+body {
+    color: #ef6125;
+    background-image: url(images/P_background.jpg);
+    background-size: contain;
+  
+    margin: 50px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.6s ease-in-out;
+}
+
+.carousel-control-prev, .carousel-control-next {
+    width: 5%;
+}
+
+.carousel-control-prev-icon, .carousel-control-next-icon {
+    background-color: #1e2530;
+    border-radius: 50%;
+    padding: 10px;
+}
+
+.carousel-control-prev-icon:hover, .carousel-control-next-icon:hover {
+    box-shadow: 0 0 15px rgba(239, 97, 37, 0.7);
+}
+
+.card {
+    border-radius: 10px;
+    background: #1e2530 !important; /* Dark background for the card */
+    color: #ef6125 !important;
+    padding: 20px;
+    transition: 0.3s;
+    border: 2px solid #ef6125 !important;
+    background-color: rgba(0, 0, 0, 0.5) !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(239, 97, 37, 0.7); /* Glow effect */
+}
+
+.card-body {
+    color: #fff; /* Text color for card body */
+}
+
+.show-graph{
+    border: 2px solid #ef6125 !important;
+    background-color: rgba(0, 0, 0, 0.5) !important;
+}
+.graph-size {
+    width: 70%;
+    height: 60%;
+}
